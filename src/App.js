@@ -1,26 +1,46 @@
 import logo from './logo.svg';
 import './App.css';
-import React from "react";
+import React, {useState} from "react";
 import Button from "./Button";
+import {movies} from "./movies";
+
 function App() {
-  const [counter, setCounter] = React.useState(0)
 
-  const increment = () => {
-    setCounter(counter +1)
-  }
+  const [currentMovie, setCurrentMovie] = useState(null)
 
-  const decrement = () => {
-    setCounter(counter -1)
-  }
   return (
       <div>
-    <p>Counter</p>
+      <h1>Movie Carsolell</h1>
 
-      <p>{counter}</p>
+        {
 
+          movies.map((movie, index) => {
 
-      <Button onClickFunction={increment} buttonText="+"/>
-     <Button onClickFunction={decrement} buttonText="-"/>
+            // this is where the logic happens
+            return (
+                <button key={movie.title} onClick={() =>setCurrentMovie(movie)}>
+                  <p>{movie.title}</p>
+                  <img src={movie.posterUrl} height={250}/>
+                </button>
+
+            )
+          })
+
+        }
+
+        {
+          currentMovie ?
+              <>
+              <p>{currentMovie.title}</p>
+              <p>{currentMovie.description}</p>
+                <p>{currentMovie.rating}</p>
+                <p>{currentMovie.director}</p>
+                <p>{currentMovie.releaseYear}</p>
+                <p>{currentMovie.categories.join(", ")}</p>
+              </>
+              : <p>Please enter a movie</p>
+        }
+
       </div>
 
   );
