@@ -11,17 +11,19 @@ function App() {
   return (
       <div>
       <h1>Movie Carsolell</h1>
-
+        <button onClick={() => setCurrentMovie(null)}>Click to reset</button>
         {
 
           movies.map((movie, index) => {
 
             // this is where the logic happens
             return (
-                <button key={movie.title} onClick={() =>setCurrentMovie(movie)}>
+
+                <Button key={movie.title} onClickFunction={() =>setCurrentMovie(movie)}>
                   <p>{movie.title}</p>
                   <img src={movie.posterUrl} height={250}/>
-                </button>
+                </Button>
+
 
             )
           })
@@ -39,7 +41,9 @@ function App() {
                 <p>{currentMovie.categories.join(", ")}</p>
               </>
               : <p>Please enter a movie</p>
+
         }
+
 
       </div>
 
